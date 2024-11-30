@@ -4,7 +4,10 @@ import com.edsure.devinfo.model.Usuario;
 import com.edsure.devinfo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class GreetingsController {
@@ -28,5 +31,12 @@ public class GreetingsController {
 
         usuarioRepository.save(usuario);//gravar no banco de dados
         return "Ola mundo " + nome;
+    }
+
+    @GetMapping(value = "listatodos") // Primeiro metodo de API
+    @ResponseBody
+    public ResponseEntity<List<Usuario>> listaUsuario() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        return new ResponseEntity<>(usuarios, HttpStatus.OK);
     }
 }
