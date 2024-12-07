@@ -6,15 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 public class GreetingsController {
-
     @Autowired
     private UsuarioRepository usuarioRepository;
-
 
     @RequestMapping(value = "/mostranome/{name}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -43,9 +40,7 @@ public class GreetingsController {
     public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario){
         Usuario user = usuarioRepository.save(usuario);
         return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
-
     }
-
 
     @DeleteMapping(value = "delete")
     @ResponseBody
@@ -61,7 +56,6 @@ public class GreetingsController {
         return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }
 
-
     @PutMapping(value = "atualizar")
     @ResponseBody
     public ResponseEntity<?> atualizar(@RequestBody Usuario usuario){
@@ -70,7 +64,6 @@ public class GreetingsController {
         }
 
         Usuario user = usuarioRepository.saveAndFlush(usuario);
-
         return new ResponseEntity<Usuario>(user, HttpStatus.OK);
 
     }
